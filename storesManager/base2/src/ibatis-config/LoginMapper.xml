@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Login">
+	<resultMap type="com.js.base.vo.SysUserBean" id="SysUser">
+		<id property="user_no" column="USER_NO" />
+		<result property="user_name" column="USER_NAME" />
+		<result property="org_no" column="ORG_NO" />
+		<result property="pass_word" column="PASS_WORD" />
+		<result property="user_sts" column="USER_STS" />
+	</resultMap>
+
+	<select id="login" resultMap="SysUser">
+		select user_no,user_name,org_no,pass_word,user_sts from sys_user where user_no=#{id}
+	</select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Test">
+	<select id="test" resultType="String">
+		select id from userstaffinfo where
+		id=45
+	</select>
+
+	<insert id="insertTest">
+		insert into test2(id,testname,createtime,falg) values(
+		#{id},
+		#{testname},
+		sysdate,
+		#{falg}
+		)
+	</insert>
+</mapper>
