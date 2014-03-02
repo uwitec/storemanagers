@@ -1,5 +1,7 @@
 package com.js.base.vo;
 
+import com.js.commons.paginator.Page;
+
 public class SysUserBean {
 	protected String user_no;
 	protected String user_name;
@@ -12,6 +14,15 @@ public class SysUserBean {
 	protected String tx_date;
 	protected String user_sts;
 	protected String op_no;
+	private Page page;
+
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
 
 	public String getUser_no() {
 		return user_no;

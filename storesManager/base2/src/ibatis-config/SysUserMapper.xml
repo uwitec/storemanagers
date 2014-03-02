@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="SysUser">
-	<resultMap type="com.js.base.vo.SysUserBean" id="RM.SysUser">
+	<resultMap type="com.js.base.vo.SysUserBean" id="SysUser">
 		<id property="user_no" column="USER_NO" />
 		<result property="user_name" column="USER_NAME" />
 		<result property="pass_word" column="pass_word" />
@@ -19,10 +19,10 @@
 		user_no,user_name,pass_word,org_no,dep_no,role_no,pass_err,pass_date,tx_date,op_no,user_sts
 	</sql>
 
-	<select id="getByID" resultMap="RM.SysUser" parameterType="java.lang.String">
+	<select id="getByID" resultMap="SysUser" parameterType="java.lang.String">
 		SELECT
 		<include refid="SysUser.columns" />
-		FROM sys_user WHERE user_no=#{id}
+		FROM sys_user WHERE user_no=#{user_no}
 	</select>
 
 	<delete id="delete" parameterType="java.lang.String">DELETE FROM sys_user WHERE user_no=#{id}</delete>
@@ -43,20 +43,20 @@
 		UPDATE sys_user SET pass_word=#{pass_word},pass_date=#{pass_date},pass_err=#{pass_err} WHERE user_no=#{user_no}
 	</update>
 
-	<select id="getList" resultMap="RM.SysUser" parameterType="com.js.base.vo.SysUserBean">
+	<select id="getList" resultMap="SysUser" parameterType="com.js.base.vo.SysUserBean">
 		SELECT
 		<include refid="SysUser.columns" />
 		FROM sys_user
-		<include refid="getList.where" />
+		<include refid="getList" />
 		ORDER BY user_no
 	</select>
 
 	<select id="getListCount" resultType="int" parameterType="com.js.base.vo.SysUserBean">
 		SELECT COUNT(*) FROM sys_user
-		<include refid="getList.where" />
+		<include refid="getList" />
 	</select>
 
-	<sql id="getList.where">
+	<sql id="getList">
 		<where>
 			<if test="user_name != null">user_name LIKE '%'||#{user_name}||'%'</if>
 			<if test="org_no != null">org_no=#{org_no}</if>

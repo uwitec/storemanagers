@@ -4,4 +4,10 @@
 	<settings>
 		<setting name="logImpl" value="LOG4J" />
 	</settings>
+	<plugins>
+		<plugin interceptor="com.js.commons.mybatis.interceptor.PaginationInterceptor">
+			<property name="dialect" value="mysql" />
+			<property name="pageSqlId" value=".*List" />
+		</plugin>
+	</plugins>
 </configuration>
