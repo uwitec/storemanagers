@@ -18,7 +18,7 @@ public class LoginDao implements ILoginDao{
 	
 	@Override
 	public SysUserBean getUser(String userNo) {
-		SysUserBean bean = (SysUserBean)sqlSession.selectOne("Login.login",userNo);
+		SysUserBean bean = (SysUserBean)sqlSession.selectOne("login",userNo);
 		logger.info("getUser......");
 		
 		return bean;

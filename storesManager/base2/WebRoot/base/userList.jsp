@@ -17,7 +17,7 @@
 				height:$("#body").height()-$('#search_area').height()-5,
 				width:$("#body").width(),
 				idField:'user_no',
-				url:"userList.do",
+				url:"../userList.do",
 				queryParams:{},
 				singleSelect:true, 
 				nowrap:true,
@@ -90,7 +90,7 @@
 			$("#self_win").window({
 					width:620,
 					height:350,
-					href:'userDetail.do?method=getUser&user_no='+id,
+					href:'../userDetail.do?method=getUser&user_no='+id,
 					title:'修改用户'
 			});
 		}
@@ -110,7 +110,8 @@
 		function searchData(){
 			var name = $('#userName').val();
 			var no = $('#depNo').val();
-			$('#tt').datagrid({url:'userList.do',queryParams:{user_name:name,dep_no:no} });
+		
+			$('#tt').datagrid({url:'../userList.do',queryParams:{user_name:name,dep_no:no} });
 		}
 		</script>
 	</head>
