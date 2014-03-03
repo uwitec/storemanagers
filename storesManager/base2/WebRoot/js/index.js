@@ -68,7 +68,8 @@ $(function() {
 //添加一个选项卡面板 
 function addTabs(title, url, icon){
 	if(!$('#tabs').tabs('exists', title)){
-		$('#tabs').tabs('add',{  
+		$('#tabs').tabs('add',{ 
+			cache: false,
 			title:title,  
 			content:'<iframe src="'+url+'" frameBorder="0" border="0" scrolling="no" style="width: 100%; height: 100%;"/>',
 			closable:true

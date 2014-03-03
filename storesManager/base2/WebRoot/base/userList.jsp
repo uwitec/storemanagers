@@ -2,14 +2,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
+	<% String contextPath=request.getContextPath(); %>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>欢迎登录</title>
-		<link rel="stylesheet" type="text/css" href="../css/default.css">
-		<link rel="stylesheet" type="text/css" href="../js/easyui/themes/gray/easyui.css">
-		<link rel="stylesheet" type="text/css" href="../js/easyui/themes/icon.css" />
-		<script type="text/javascript" src="../js/easyui/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="../js/easyui/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="../js/common.js"></script>	
+		<link rel="stylesheet" type="text/css" href="<%=contextPath%>/css/default.css">
+		<link rel="stylesheet" type="text/css" href="<%=contextPath%>/js/easyui/themes/gray/easyui.css">
+		<link rel="stylesheet" type="text/css" href="<%=contextPath%>/js/easyui/themes/icon.css" />
+		<script type="text/javascript" src="<%=contextPath%>/js/easyui/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="<%=contextPath%>/js/easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="<%=contextPath%>/js/common.js"></script>	
 		<script type="text/javascript" src="dic.js"></script>
 		<script type="text/javascript">
 		$(function(){
@@ -17,14 +18,14 @@
 				height:$("#body").height()-$('#search_area').height()-5,
 				width:$("#body").width(),
 				idField:'user_no',
-				url:"../userList.do",
+				url:"<%=contextPath%>/userList.do?randnum="+Math.floor(Math.random()*1000000),
 				queryParams:{},
 				singleSelect:true, 
 				nowrap:true,
 				pageSize:10,
 				fitColumns:true,
 				rownumbers:true,
-				showPageList:false,
+				showPageList:true,
 				columns:[[
 					{field:'user_no',title:'用户号码',width:100,halign:"center", align:"left"},
 					{field:'user_name',title:'姓名',width:100,halign:"center", align:"left"},
@@ -62,7 +63,7 @@
 					$("#self_win").window({
 						width:620,
 						height:350,
-						href:'userDetail.do?method=getUser&user_no='+user_no,
+						href:'../userDetail.do?method=getUser&user_no='+user_no,
 						title:'修改用户'
 					});
 				}else{
@@ -90,7 +91,7 @@
 			$("#self_win").window({
 					width:620,
 					height:350,
-					href:'../userDetail.do?method=getUser&user_no='+id,
+					href:'<%=contextPath%>/userDetail.do?method=getUser&user_no='+id,
 					title:'修改用户'
 			});
 		}
@@ -111,7 +112,7 @@
 			var name = $('#userName').val();
 			var no = $('#depNo').val();
 		
-			$('#tt').datagrid({url:'../userList.do',queryParams:{user_name:name,dep_no:no} });
+			$('#tt').datagrid({url:'<%=contextPath%>/userList.do',queryParams:{user_name:name,dep_no:no} });
 		}
 		</script>
 	</head>

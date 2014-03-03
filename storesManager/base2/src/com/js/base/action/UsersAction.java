@@ -40,12 +40,14 @@ public class UsersAction {
 		parm.setUser_name(req.getParameter("user_name"));
 		parm.setDep_no(req.getParameter("dep_no"));
 		Page page = new Page();
+		System.out.println(req.getParameter("randnum"));
 		System.out.println(req.getParameter("page"));
 		System.out.println(req.getParameter("rows"));
 		page.setCurrentPage(StringUtils.isBlank(req.getParameter("page")) ? 1
 				: Integer.parseInt(req.getParameter("page")));
 		page.setShowCount(StringUtils.isBlank(req.getParameter("rows")) ? 1
 				: Integer.parseInt(req.getParameter("rows")));
+		parm.setPage(page);
 		List<SysUserBean> list = usersService.getUser(parm);
 
 		JSONArray json = new JSONArray();
@@ -61,7 +63,7 @@ public class UsersAction {
 
 		JSONObject datas = new JSONObject();
 		datas.put("rows", json);
-		datas.put("total", list.size());
+		datas.put("total", 11);
 		return JSONObject.fromObject(datas);
 	}
 
