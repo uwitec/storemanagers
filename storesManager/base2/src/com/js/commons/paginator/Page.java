@@ -1,7 +1,7 @@
 package com.js.commons.paginator;
 
 public class Page {
-	private int showCount = 10; // 每页显示记录数
+	private int showCount; // 每页显示记录数
 	private int totalPage; // 总页数
 	private int totalResult; // 总记录数
 	private int currentPage; // 当前页
