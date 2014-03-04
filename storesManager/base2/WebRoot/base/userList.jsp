@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="<%=contextPath%>/js/easyui/jquery-1.10.2.min.js"></script>
 		<script type="text/javascript" src="<%=contextPath%>/js/easyui/jquery.easyui.min.js"></script>
 		<script type="text/javascript" src="<%=contextPath%>/js/common.js"></script>	
-		<script type="text/javascript" src="dic.js"></script>
+		<script type="text/javascript" src="<%=contextPath%>/js/dic.js"></script>
 		<script type="text/javascript">
 		$(function(){
 			$("#tt").datagrid({
