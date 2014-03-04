@@ -58,7 +58,7 @@
 
 	<sql id="getList">
 		<where>
-			<if test="user_name != null">user_name LIKE '%'||#{user_name}||'%'</if>
+			<if test="user_name != null">user_name LIKE concat('%',#{user_name},'%')</if>
 			<if test="org_no != null">org_no=#{org_no}</if>
 		</where>
 	</sql>
