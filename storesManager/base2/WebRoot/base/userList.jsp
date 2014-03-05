@@ -63,7 +63,7 @@
 					$("#self_win").window({
 						width:620,
 						height:350,
-						href:'../userDetail.do?method=getUser&user_no='+user_no,
+						href:'<%=contextPath%>/userDetail.do?method=getUser&user_no='+user_no,
 						title:'修改用户'
 					});
 				}else{
