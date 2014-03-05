@@ -2,6 +2,7 @@ package com.js.base.action;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +16,7 @@ import com.js.base.service.ILoginService;
 import com.js.base.vo.LoginBean;
 import com.js.base.vo.SysUserBean;
 import com.js.commons.interceptor.LoginSessionListener;
+import com.js.commons.util.Const;
 
 @Controller
 @RequestMapping("")
@@ -26,15 +28,14 @@ public class LoginAction {
 
 	@RequestMapping(value = "/userLogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Model model,@ModelAttribute("form") LoginBean loginForm,HttpServletRequest req) throws Exception {
-		if(null==loginForm||LoginSessionListener.isOnline(req.getParameter("userName")) ){
+		if(null==loginForm||(null!=loginForm&&StringUtils.isBlank(loginForm.getUserName()))){
 			return "login";	
 		}
 		SysUserBean bean = loginService.getUser("000000");
+		req.getSession().setAttribute(Const.SESSION_USER,bean);
 		if (bean == null) {
 			logger.info("Login:用不不存在");
 		} else {
-//			LoginSessionListener.setSessionBySessionId(loginForm.getUserNo());
-			LoginSessionListener.putSessionMap(req.getSession(), req.getParameter("userName"));
 			logger.info("Login:" + bean.getUser_no());
 		}
 		return "main";
