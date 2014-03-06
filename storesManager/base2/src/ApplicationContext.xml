@@ -25,6 +25,12 @@
 	<mvc:annotation-driven />
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	<aop:aspectj-autoproxy />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*.do*"/>
+			<bean class="com.js.commons.interceptor.LoginHandlerInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<!-- 定义受环境影响易变的变量 -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
@@ -39,10 +45,10 @@
 	<!-- 2.数据源配置,使用应用内的DBCP数据库连接池 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<!-- Connection Info -->
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" />
-		<property name="username" value="eoms" />
-		<property name="password" value="eoms" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost/stores" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
 		<property name="initialSize" value="2" />
 		<property name="maxActive" value="20" />
 		<property name="maxWait" value="5" />

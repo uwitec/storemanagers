@@ -1,5 +1,7 @@
 package com.js.base.vo;
 
+import com.js.commons.paginator.Page;
+
 public class SysOrgBean {
 	protected String org_no;
 	protected String org_name;
@@ -10,6 +12,16 @@ public class SysOrgBean {
 	protected String org_lkman;
 	protected String org_tel;
 	protected String org_sts;
+	protected Page page;
+	
+
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
 
 	public String getOrg_no() {
 		return org_no;

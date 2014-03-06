@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysOrg">
+	<resultMap type="com.js.base.vo.SysOrgBean" id="SysOrg">
+		<result property="org_no" column="ORG_NO" />
+		<result property="org_name" column="ORG_NAME" />
+		<result property="org_lvl" column="ORG_LVL" />
+		<result property="org_type" column="ORG_TYPE" />
+		<result property="org_upno" column="ORG_UPNO" />
+		<result property="org_addr" column="ORG_ADDR" />
+		<result property="org_lkman" column="ORG_LKMAN" />
+		<result property="org_tel" column="ORG_TEL" />
+		<result property="org_sts" column="ORG_STS" />
+	</resultMap>
+
+	<sql id="SysOrg.columns">
+		ORG_NO,ORG_NAME,ORG_LVL,ORG_TYPE,ORG_UPNO,ORG_ADDR,ORG_LKMAN,ORG_TEL,ORG_STS
+	</sql>
+
+	<select id="SysOrg_getByID" resultMap="SysOrg" parameterType="java.lang.String">
+		SELECT
+		<include refid="SysOrg.columns" />
+		FROM sys_org WHERE ORG_NO=#{org_no}
+	</select>
+
+	<delete id="SysOrg_delete" parameterType="java.lang.String">DELETE FROM sys_org WHERE user_no=#{id}</delete>
+
+	<insert id="SysOrg_insert" parameterType="com.js.base.vo.SysOrgBean">
+		INSERT INTO sys_org
+		(ORG_NO,ORG_NAME,ORG_LVL,ORG_TYPE,ORG_UPNO,ORG_ADDR,ORG_LKMAN,ORG_TEL,ORG_STS) VALUES
+		(#{org_no},#{org_name},#{org_lvl},#{org_type},#{org_upno},#{org_addr},#{org_lkman},#{org_tel},#{org_sts})
+	</insert>
+
+	<update id="SysOrg_update" parameterType="com.js.base.vo.SysOrgBean">
+		UPDATE sys_org SET
+		org_sts=#{org_sts},org_lkman=#{org_lkman} WHERE
+		org_no=#{org_no}
+	</update>
+
+	<select id="SysOrg_getlist" resultMap="SysOrg" parameterType="com.js.base.vo.SysOrgBean">
+		SELECT
+		<include refid="SysOrg.columns" />
+		FROM sys_org
+	</select>
+
+</mapper>
