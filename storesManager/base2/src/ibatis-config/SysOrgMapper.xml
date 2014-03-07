@@ -23,8 +23,6 @@
 		FROM sys_org WHERE ORG_NO=#{org_no}
 	</select>
 
-	<delete id="SysOrg_delete" parameterType="java.lang.String">DELETE FROM sys_org WHERE user_no=#{id}</delete>
-
 	<insert id="SysOrg_insert" parameterType="com.js.base.vo.SysOrgBean">
 		INSERT INTO sys_org
 		(ORG_NO,ORG_NAME,ORG_LVL,ORG_TYPE,ORG_UPNO,ORG_ADDR,ORG_LKMAN,ORG_TEL,ORG_STS) VALUES
@@ -33,7 +31,8 @@
 
 	<update id="SysOrg_update" parameterType="com.js.base.vo.SysOrgBean">
 		UPDATE sys_org SET
-		org_sts=#{org_sts},org_lkman=#{org_lkman} WHERE
+		org_name=#{org_name},
+		org_sts=#{org_sts},org_lkman=#{org_lkman},org_tel=#{org_tel} WHERE
 		org_no=#{org_no}
 	</update>
 
@@ -43,4 +42,13 @@
 		FROM sys_org
 	</select>
 
+	<select id="SysOrg_getMaxOrgNo" resultType="java.lang.String">
+		SELECT
+		max(org_no) as org_no
+		FROM sys_org
+	</select>
+
+<delete id="SysOrg_delete" parameterType="java.lang.String">
+	delete from sys_org where org_no=#{org_no}
+</delete>
 </mapper>

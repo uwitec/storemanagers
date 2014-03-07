@@ -40,8 +40,21 @@ public class SysOrgService implements ISysOrgService {
 	@Override
 	public int insertOrg(SysOrgBean bean) throws Exception {
 		// TODO Auto-generated method stub
-		int sum=sysOrgDao.updateOrg(bean);
+		int sum=sysOrgDao.insertOrg(bean);
 		return sum;
+	}
+	
+	@Override
+	public String getMaxOrgNo() throws Exception {
+		// TODO Auto-generated method stub
+		String org_no=sysOrgDao.getMaxOrgNo();
+		return org_no;
+	}
+	
+	@Override
+	public void deleteOrg(String org_no) throws Exception {
+		// TODO Auto-generated method stub
+		sysOrgDao.deleteOrg(org_no);
 	}
 
 }

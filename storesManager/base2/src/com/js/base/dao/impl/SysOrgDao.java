@@ -53,5 +53,25 @@ public class SysOrgDao implements ISysOrgDao {
 		int sum=sqlSession.insert("SysOrg_insert",bean);
 		return sum;
 	}
+	
+	@Override
+	public String getMaxOrgNo() throws Exception {
+		// TODO Auto-generated method stub
+		logger.debug("SysOrgDao.getMaxOrgNo()");
+		List<String> list=sqlSession.selectList("SysOrg_getMaxOrgNo");
+		String org_no="";
+		if(null!=list&&list.size()>0){
+			org_no=list.get(0);
+		}
+		return org_no;
+	}
+	
+	@Override
+	public void deleteOrg(String org_no) throws Exception {
+		// TODO Auto-generated method stub
+		logger.debug("SysOrgDao.deleteOrg()");
+		sqlSession.delete("SysOrg_delete", org_no);
+		
+	}
 
 }

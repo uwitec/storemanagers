@@ -55,11 +55,60 @@ public class SysOrgAction {
 	public @ResponseBody
 	String orgAdd(Model model, HttpServletRequest req,
 			@ModelAttribute("form") SysOrgBean parm) throws Exception {
-		int sum=sysOrgService.insertOrg(parm);
-		if(sum==1){
-			return "success";
-		}else{
-			return "error";
+		String org_no=sysOrgService.getMaxOrgNo();
+		long max_org_no=Long.parseLong(org_no)+1;
+		System.out.println("abc:"+max_org_no);
+		parm.setOrg_no(max_org_no+"");
+		try {
+			sysOrgService.insertOrg(parm);
+			return "1";
+		} catch (Exception e) {
+			return "0";
+		}
+	}
+	
+	@RequestMapping(value = "/orgDelete", method = { RequestMethod.GET,
+			RequestMethod.POST })
+			public @ResponseBody
+			String orgDelete(Model model, HttpServletRequest req) throws Exception {
+		String org_no=req.getParameter("id");
+		try {
+			sysOrgService.deleteOrg(org_no);
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("result", "success");
+			return jsonObject.toString();
+		} catch (Exception e) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("result", "success");
+			return jsonObject.toString();
+		}
+	}
+	
+	@RequestMapping(value = "/orgDetail", method = { RequestMethod.GET,
+			RequestMethod.POST })
+			public String orgDetail(Model model, HttpServletRequest req) throws Exception {
+		String org_no=req.getParameter("id");
+		SysOrgBean bean=new SysOrgBean();
+		try {
+			bean=sysOrgService.getOrgDetails(org_no);
+		} catch (Exception e) {
+		}
+		
+		model.addAttribute("command", bean);
+		return "base/orgDetail";
+		
+	}
+	
+	@RequestMapping(value = "/orgUpdate", method = { RequestMethod.GET,
+			RequestMethod.POST })
+			public @ResponseBody
+			String orgUpdate(Model model, HttpServletRequest req,
+					@ModelAttribute("form") SysOrgBean parm) throws Exception {
+		try {
+			sysOrgService.updateOrg(parm);
+			return "1";
+		} catch (Exception e) {
+			return "0";
 		}
 	}
 
