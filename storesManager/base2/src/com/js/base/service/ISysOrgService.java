@@ -12,4 +12,8 @@ public interface ISysOrgService {
 	public int updateOrg(SysOrgBean bean) throws Exception;
 	
 	public int insertOrg(SysOrgBean bean) throws Exception;
+	
+	public String getMaxOrgNo() throws Exception;
+	
+	public void deleteOrg(String org_no) throws Exception;
 }

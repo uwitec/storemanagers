@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <%
@@ -94,24 +93,40 @@ $("#update").on("click", function(){
 		$("#self_win").window({
 			width:620,
 			height:350,
-			href:'<%=contextPath%>/orgDetail.do?id='+id,
+			href:'<%=contextPath%>/orgDetail.do?id='+node.id,
 			title:'修改机构'
 		});
 	}else{
 		$parent.messager.alert("提示","请选择要修改的记录", "info");
 	}
 });
+
+//删除
+$("#delete").on("click", function(){
+	var node = $('#tt').tree('getSelected');
+    if (node){
+        $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
+            if (r){
+                $.post('<%=contextPath%>/orgDelete.do',{id:node.id},function(data){
+                    if (data.result=='success'){
+                		$parent.messager.alert("提示","修改成功", "info");
+                    	$('#tt').tree('reload');    // reload the user data
+                    } else {
+                    	$parent.messager.alert("提示","修改失败", "info");
+                    }
+                },'json');
+            }
+        });}});
 	})
 </script>
-<body class="easyui-layout">
-   	<div style="padding:3px 2px;border-bottom:1px solid #ccc"></div>
-	<div id="tt_btn">
-      	<a href="javascript:void(0)"  id="save" class="easyui-linkbutton" iconCls="icon-add" plain="true">新增</a>
-      	<a href="javascript:void(0)"  id="update" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a> 
-      	<a href="javascript:void(0)"  id="delete" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
-   	</div>
-   	<div style="padding:3px 2px;border-bottom:1px solid #ccc"></div>
-   	
+<body class="panel-body">
+   	 <div style="margin:10px 0;"></div>
+    <div style="padding:5px;border:1px solid #ddd;">
+        <a href="#" class="easyui-linkbutton"  id="save"  data-options="plain:true,iconCls:'icon-add'">新增</a>
+        <a href="#" class="easyui-linkbutton" id="update" data-options="plain:true,iconCls:'icon-edit'">修改</a>
+        <a href="#" class="easyui-linkbutton" id="delete" data-options="plain:true,iconCls:'icon-cancel'">删除</a>
+    </div>
+ 
 	<ul id="tt" class="easyui-tree"></ul>
 <div id="self_win"></div>
 </body>
