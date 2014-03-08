@@ -26,7 +26,7 @@
 	<insert id="SysOrg_insert" parameterType="com.js.base.vo.SysOrgBean">
 		INSERT INTO sys_org
 		(ORG_NO,ORG_NAME,ORG_LVL,ORG_TYPE,ORG_UPNO,ORG_ADDR,ORG_LKMAN,ORG_TEL,ORG_STS) VALUES
-		(#{org_no},#{org_name},#{org_lvl},#{org_type},#{org_upno},#{org_addr},#{org_lkman},#{org_tel},#{org_sts})
+		(#{org_no},#{org_name},#{org_lvl},#{org_type},#{org_upno},#{org_addr},#{org_lkman},#{org_tel},'1')
 	</insert>
 
 	<update id="SysOrg_update" parameterType="com.js.base.vo.SysOrgBean">
@@ -39,7 +39,7 @@
 	<select id="SysOrg_getlist" resultMap="SysOrg" parameterType="com.js.base.vo.SysOrgBean">
 		SELECT
 		<include refid="SysOrg.columns" />
-		FROM sys_org
+		FROM sys_org WHERE ORG_STS='1'
 	</select>
 
 	<select id="SysOrg_getMaxOrgNo" resultType="java.lang.String">
@@ -49,6 +49,6 @@
 	</select>
 
 <delete id="SysOrg_delete" parameterType="java.lang.String">
-	delete from sys_org where org_no=#{org_no}
+	update sys_org set org_sts='0' where org_no=#{org_no}
 </delete>
 </mapper>

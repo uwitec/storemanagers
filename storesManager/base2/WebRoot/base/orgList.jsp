@@ -77,7 +77,7 @@ $("#save").on("click", function(){
 		var id=node.id;
 		$("#self_win").window({
 			width:300,
-			height:300,
+			height:250,
 			href:'<%=contextPath%>/base/orgAdd.jsp?id='+id,
 			title:'新增机构'
 		});
@@ -91,8 +91,8 @@ $("#update").on("click", function(){
 	var node = $('#tt').tree('getSelected');
 	if(node){
 		$("#self_win").window({
-			width:620,
-			height:350,
+			width:300,
+			height:250,
 			href:'<%=contextPath%>/orgDetail.do?id='+node.id,
 			title:'修改机构'
 		});
@@ -105,7 +105,7 @@ $("#update").on("click", function(){
 $("#delete").on("click", function(){
 	var node = $('#tt').tree('getSelected');
     if (node){
-        $.messager.confirm('Confirm','Are you sure you want to destroy this user?',function(r){
+        $.messager.confirm('Confirm','确定要删除此机构吗?',function(r){
             if (r){
                 $.post('<%=contextPath%>/orgDelete.do',{id:node.id},function(data){
                     if (data.result=='success'){

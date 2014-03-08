@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.js.base.vo.SysUserBean;
+import com.js.commons.exception.AuthorizationException;
 import com.js.commons.util.Const;
 
 public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
@@ -23,8 +24,7 @@ public class LoginHandlerInterceptor extends HandlerInterceptorAdapter{
 			if(user!=null){
 				return true;
 			}else{
-				response.sendRedirect(request.getContextPath()+"/userLogin.do");
-				return false;
+				 throw new AuthorizationException("由于您长时间未操作，请重新登录！");
 			}
 		}
 	}
