@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:security="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p" xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="  
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
@@ -27,12 +28,13 @@
 	<aop:aspectj-autoproxy />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**/*.do*"/>
-			<bean class="com.js.commons.interceptor.LoginHandlerInterceptor"/>
+			<mvc:mapping path="/*" />
+			<bean class="com.js.commons.interceptor.LoginHandlerInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	<!-- 定义受环境影响易变的变量 -->
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
 		<property name="ignoreResourceNotFound" value="true" />
 		<property name="locations">
@@ -43,7 +45,8 @@
 		</property>
 	</bean>
 	<!-- 2.数据源配置,使用应用内的DBCP数据库连接池 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
 		<!-- Connection Info -->
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost/stores" />
@@ -56,41 +59,22 @@
 	</bean>
 
 	<!-- 事务管理器 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	<!-- 事务拦截器 -->
-	<bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
-		<property name="transactionManager" ref="transactionManager" />
-		<property name="transactionAttributes">
-			<props>
-				<prop key="save*">PROPAGATION_REQUIRED</prop>
-				<prop key="insert*">PROPAGATION_REQUIRED</prop>
-				<prop key="add*">PROPAGATION_REQUIRED</prop>
-				<prop key="update*">PROPAGATION_REQUIRED</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED</prop>
-				<prop key="del*">PROPAGATION_REQUIRED</prop>
-				<prop key="*">readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<!-- 事务代理 -->
-	<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
-		<property name="beanNames">
-			<list>
-				<value>*Service</value>
-				<value>*BO</value>
-				<value>*Bo</value>
-				<value>*bo</value>
-			</list>
-		</property>
-		<property name="interceptorNames">
-			<list>
-				<value>transactionInterceptor</value>
-			</list>
-		</property>
-	</bean>
-	
+	<!-- <bean id="transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor"> 
+		<property name="transactionManager" ref="transactionManager" /> <property 
+		name="transactionAttributes"> <props> <prop key="save*">PROPAGATION_REQUIRED</prop> 
+		<prop key="insert*">PROPAGATION_REQUIRED</prop> <prop key="add*">PROPAGATION_REQUIRED</prop> 
+		<prop key="update*">PROPAGATION_REQUIRED</prop> <prop key="delete*">PROPAGATION_REQUIRED</prop> 
+		<prop key="del*">PROPAGATION_REQUIRED</prop> <prop key="*">readOnly</prop> 
+		</props> </property> </bean> 事务代理 <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> 
+		<property name="beanNames"> <list> <value>*Service</value> <value>*BO</value> 
+		<value>*Bo</value> <value>*bo</value> </list> </property> <property name="interceptorNames"> 
+		<list> <value>transactionInterceptor</value> </list> </property> </bean> -->
+
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="configLocation">
 			<value>classpath:ibatis-config/mybatis-config.xml</value>
@@ -100,13 +84,19 @@
 		</property>
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 		<constructor-arg index="1" value="BATCH" /><!-- 如果想要进行批量操作可加入这个属性 -->
 	</bean>
-	<!--  
-	<bean class="com.telling.cxf.test.utils.ApplicationContextUtil"></bean>
-	-->
+	<!-- <bean class="com.telling.cxf.test.utils.ApplicationContextUtil"></bean> -->
+	<bean id="handlerExceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="exceptionMappings">
+			<props>
+				<prop key="com.js.commons.exception.AuthorizationException">redirect:/userLogin.do</prop>
+			</props>
+		</property>
+	</bean>
 </beans>
 

@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>医考在线试题系统</title>
+		<title>库存管理系统</title>
 		<link rel="stylesheet" type="text/css" href="./css/default.css">
 		<link rel="stylesheet" type="text/css" href="./js/easyui/themes/gray/easyui.css">
 		<link rel="stylesheet" type="text/css" href="./js/easyui/themes/icon.css" />
@@ -18,7 +18,7 @@
 	<body class="easyui-layout">
 		<!-- 头部标题 -->
 		<div data-options="region:'north',border:false" style="height:60px; padding:5px; background:#F3F3F3"> 
-			<span class="northTitle">中域医考在线试题管理系统</span>
+			<span class="northTitle">库存管理系统</span>
     		<span class="loginInfo">登录用户：admin&nbsp;&nbsp;姓名：管理员&nbsp;&nbsp;角色：系统管理员</span>
 		</div>
 
