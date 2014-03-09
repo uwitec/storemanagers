@@ -3,12 +3,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
+		<% String contextPath=request.getContextPath(); %>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>中域医考在线试题管理系统 -- 欢迎登录</title>
-		<link rel="stylesheet" type="text/css" href="./js/easyui/themes/icon.css" />
-		<link rel="stylesheet" type="text/css" href="./js/easyui/themes/gray/easyui.css" />
-		<script src="./js/easyui/jquery-1.10.2.min.js"></script>
-		<script src="./js/easyui/jquery.easyui.min.js"></script>
+		<title>库存管理系统 -- 欢迎登录</title>
+		<link rel="stylesheet" type="text/css" href="<%=contextPath%>/js/easyui/themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="<%=contextPath%>/js/easyui/themes/gray/easyui.css" />
+		<script src="<%=contextPath%>/js/easyui/jquery-1.10.2.min.js"></script>
+		<script src="<%=contextPath%>/js/easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="<%=contextPath%>/js/easyui/locale/easyui-lang-zh_CN.js"></script>
+		
 	</head>
 
 	<body>
@@ -16,18 +19,18 @@
 			minimizable="false" maximizable="false" resizable="false" collapsible="false">
 			<div class="easyui-layout" fit="true">
 				<div region="center" border="false" style="padding: 5px; background: #fff; border: 1px solid #ccc;">
-					<form id="loginForm" method="post" action="./userLogin.do">
+					<form id="loginForm" method="post" action="<%=contextPath%>/userLogin.do">
 						<div style="padding: 5px 0;" align="center">
 							<label for="login">
 								帐号:
 							</label>
-							<input type="text" name="userName" style="width: 120px;"></input>
+							<input type="text" name="userNo" class="easyui-validatebox" data-options="required:true"></input>
 						</div>
 						<div style="padding: 5px 0;" align="center">
 							<label for="password">
 								密码:
 							</label>
-							<input type="password" name="passWord" style="width: 120px;"></input>
+							<input type="password" name="passWord" class="easyui-validatebox" data-options="required:true"></input>
 						</div>
 						<div style="padding: 5px 0; text-align: center; color: red;" id="showMsg"></div>
 					</form>

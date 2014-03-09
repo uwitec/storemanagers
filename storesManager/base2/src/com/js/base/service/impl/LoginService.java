@@ -15,8 +15,8 @@ public class LoginService implements ILoginService {
 	private ILoginDao loginDao;
 
 	@Override
-	public SysUserBean getUser(String userNo) throws Exception {
-		SysUserBean bean = loginDao.getUser(userNo);
+	public SysUserBean getUser(SysUserBean user) throws Exception {
+		SysUserBean bean = loginDao.getUser(user);
 		return bean;
 	}
 

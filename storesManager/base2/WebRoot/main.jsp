@@ -2,18 +2,22 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 	<head>
+	<%
+	String contextPath = request.getContextPath();
+%>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>库存管理系统</title>
-		<link rel="stylesheet" type="text/css" href="./css/default.css">
-		<link rel="stylesheet" type="text/css" href="./js/easyui/themes/gray/easyui.css">
-		<link rel="stylesheet" type="text/css" href="./js/easyui/themes/icon.css" />
-		<link rel="stylesheet" type="text/css" href="./js/zTree/css/zTreeStyle/zTreeStyle.css">
-		<script type="text/javascript" src="./js/easyui/jquery-1.10.2.min.js"></script>
-		<script type="text/javascript" src="./js/easyui/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="./js/zTree/jquery.ztree.all-3.5.min.js"></script>
-		<script type="text/javascript" src="./js/index.js"></script>
-		<script type="text/javascript" src="./js/extends.js"></script>
-		<script type="text/javascript" src="./js/common.js"></script>		
+		<link rel="stylesheet" type="text/css" href="<%=contextPath%>/css/default.css">
+		<link rel="stylesheet" type="text/css" href="<%=contextPath%>/js/easyui/themes/gray/easyui.css">
+		<link rel="stylesheet" type="text/css" href="<%=contextPath%>/js/easyui/themes/icon.css" />
+		<link rel="stylesheet" type="text/css" href="<%=contextPath%>/js/zTree/css/zTreeStyle/zTreeStyle.css">
+		<script type="text/javascript" src="<%=contextPath%>/js/easyui/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="<%=contextPath%>/js/easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="<%=contextPath%>/js/zTree/jquery.ztree.all-3.5.min.js"></script>
+		<script type="text/javascript" src="<%=contextPath%>/js/index.js"></script>
+		<script type="text/javascript" src="<%=contextPath%>/js/extends.js"></script>
+		<script type="text/javascript" src="<%=contextPath%>/js/common.js"></script>		
+		<script type="text/javascript" src="<%=contextPath%>/js/json2.js"></script>		
 	</head>
 	<body class="easyui-layout">
 		<!-- 头部标题 -->
@@ -24,7 +28,8 @@
 
 		<!-- 左侧导航 -->
 		<div data-options="region:'west',split:true,title:'导航菜单', fit:false" style="width:200px;"> 
-  			<ul id="menuTree" class="ztree"> </ul>
+  			<ul id="menuTree" class="ztree" > </ul>
+		    <input id="menuUrl" type="hidden" value='${sessionRoleRights}' name="menuUrl"></input>
 		</div>
 
 		<!-- 页脚信息 -->

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysRole">
+	<resultMap type="com.js.base.vo.SysRoleBean" id="SysRole">
+		<id property="role_no" column="ROLE_NO" />
+		<result property="role_name" column="ROLE_NAME" />
+		<result property="role_sts" column="ROLE_STS" />
+		<result property="tx_date" column="TX_DATE" />
+		<result property="op_no" column="OP_NO" />
+	</resultMap>
+
+	<sql id="SysRole.columns">
+		role_no,role_name,role_sts,tx_date,op_no
+	</sql>
+
+	<select id="SysRole_getByID" resultMap="SysRole" parameterType="java.lang.String">
+		SELECT
+		<include refid="SysRole.columns" />
+		FROM sys_role WHERE role_no=#{role_no}
+	</select>
+
+	<insert id="SysRole_insert" parameterType="com.js.base.vo.SysRoleBean">
+		INSERT INTO sys_role
+		(role_no,role_name,role_sts,tx_date,op_no)
+		VALUES
+		(#{role_no},#{role_name},'1',#{tx_date},#{op_no})
+	</insert>
+
+	<update id="SysRole_update" parameterType="com.js.base.vo.SysRoleBean">
+		UPDATE sys_role SET
+		role_name=#{role_name}
+		WHERE
+		role_no=#{role_no}
+	</update>
+
+	<update id="SysRole_delete" parameterType="com.js.base.vo.SysRoleBean">
+		UPDATE sys_role SET
+		role_sts=#{role_sts} WHERE role_no=#{role_no}
+	</update>
+
+	<select id="SysRole_getList" resultMap="SysRole"
+		parameterType="com.js.base.vo.SysRoleBean">
+		SELECT
+		<include refid="SysRole.columns" />
+		FROM sys_role  where role_sts='1'
+		<include refid="SysRole_getList" />
+		ORDER BY role_no
+	</select>
+
+	<select id="SysRole_getListCount" resultType="int"
+		parameterType="com.js.base.vo.SysRoleBean">
+		SELECT COUNT(*) FROM sys_role where role_sts='1'
+		<include refid="SysRole_getList" />
+	</select>
+
+	<sql id="SysRole_getList">
+		<if test="role_name != null">role_name LIKE concat('%',#{role_name},'%')</if>
+	</sql>
+
+	<select id="SysRole_getMaxOrgNo" resultType="java.lang.String">
+		SELECT
+		max(role_no) as role_no
+		FROM sys_role
+	</select>
+</mapper>

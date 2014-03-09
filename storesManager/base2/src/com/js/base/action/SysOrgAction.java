@@ -44,6 +44,7 @@ public class SysOrgAction {
 			jsonObject.put("id", org.getOrg_no());
 			jsonObject.put("parentId", org.getOrg_upno());
 			jsonObject.put("name", org.getOrg_name());
+			jsonObject.put("checked", "false");
 			json.add(jsonObject);
 		}
 		System.out.println(json.toString());
@@ -56,6 +57,9 @@ public class SysOrgAction {
 	String orgAdd(Model model, HttpServletRequest req,
 			@ModelAttribute("form") SysOrgBean parm) throws Exception {
 		String org_no=sysOrgService.getMaxOrgNo();
+		if(StringUtils.isBlank(org_no)){
+			org_no="0";
+		}
 		long max_org_no=Long.parseLong(org_no)+1;
 		System.out.println("abc:"+max_org_no);
 		parm.setOrg_no(max_org_no+"");
