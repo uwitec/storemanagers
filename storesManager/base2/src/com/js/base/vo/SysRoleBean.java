@@ -1,5 +1,7 @@
 package com.js.base.vo;
 
+import com.js.commons.paginator.Page;
+
 public class SysRoleBean {
 	protected String role_no;
 	protected String role_name;
@@ -10,6 +12,15 @@ public class SysRoleBean {
 	protected String role_sts;
 	protected String tx_date;
 	protected String op_no;
+	protected Page page;
+
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
+	}
 
 	public String getRole_no() {
 		return role_no;

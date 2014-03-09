@@ -25,24 +25,9 @@ var setting = {
 	}
 };
 
-var zNodes =[
-	{ id:1, pId:0, name:"系统管理", open:true},
-	{ id:10, pId:1, name:"机构管理", file:"base/orgList.jsp"},
-	{ id:11, pId:1, name:"用户管理", file:"base/userList.jsp"},
-	{ id:12, pId:1, name:"权限管理", file:"base/authList.jsp"},
-	{ id:2, pId:0, name:"医考管理", open:true},
-	{ id:21, pId:2, name:"医考试题", file:"eoms/examList.jsp"},
-	{ id:3, pId:0, name:"学员管理", open:true},
-	{ id:31, pId:3, name:"学员管理", file:"eoms/studentList.jsp"},
-	{ id:4, pId:0, name:"移动应用", open:true},
-	{ id:40, pId:4, name:"应用设置", file:"eoms/appList.jsp"},
-	{ id:41, pId:4, name:"发布首页", file:"eoms/appList.jsp"},
-	{ id:42, pId:4, name:"发布广告", file:"eoms/appList.jsp"},
-	{ id:43, pId:4, name:"发布信息", file:"eoms/appList.jsp"}
-];
-
 $(function() {
-	$.fn.zTree.init($("#menuTree"), setting, zNodes);
+	var menu=$("#menuUrl").attr("value");
+	$.fn.zTree.init($("#menuTree"), setting, JSON.parse(menu));
 	var zTree = $.fn.zTree.getZTreeObj("menuTree");
 	
 	//中间部分tab

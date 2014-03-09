@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="RoleMenu">
+	<resultMap type="com.js.base.vo.RoleMenuBean" id="RoleMenu">
+		<result property="menu_no" column="MENU_NO" />
+		<result property="menu_name" column="MENU_NAME" />
+		<result property="role_no" column="ROLE_NO" />
+		<result property="menu_upno" column="MENU_UPNO" />
+		<result property="menu_url" column="MENU_URL" />
+		<result property="isChecked" column="ISCHECKED" />
+	</resultMap>
+
+	<sql id="RoleMenu.columns">
+		ORG_NO,ORG_NAME,ORG_LVL,ORG_TYPE,ORG_UPNO,ORG_ADDR,ORG_LKMAN,ORG_TEL,ORG_STS
+	</sql>
+
+	<insert id="RoleMenu_insert" parameterType="com.js.base.vo.RoleMenuBean">
+		INSERT INTO
+		RELATION_ROLE_MENU
+		(ROLE_NO,MENU_NO) VALUES
+		(#{role_no},#{menu_no})
+	</insert>
+
+	<select id="RoleMenu_getlist" resultMap="RoleMenu"
+		parameterType="com.js.base.vo.RoleMenuBean">
+		SELECT A.MENU_NO,A.MENU_NAME,A.MENU_UPNO,A.MENU_URL,C.ROLE_NO AS ISCHECKED FROM
+		SYS_MENU A LEFT JOIN RELATION_ROLE_MENU B ON A.MENU_NO=B.MENU_NO LEFT
+		JOIN SYS_ROLE C ON B.ROLE_NO=C.ROLE_NO AND C.ROLE_NO=#{role_no}
+	</select>
+
+
+	<delete id="RoleMenu_delete" parameterType="java.lang.String">
+		DELETE FROM RELATION_ROLE_MENU  WHERE ROLE_NO=#{role_no}
+</delete>
+</mapper>

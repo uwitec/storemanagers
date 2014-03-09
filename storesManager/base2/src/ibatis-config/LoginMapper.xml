@@ -7,9 +7,10 @@
 		<result property="org_no" column="ORG_NO" />
 		<result property="pass_word" column="PASS_WORD" />
 		<result property="user_sts" column="USER_STS" />
+		<result property="role_no" column="ROLE_NO" />
 	</resultMap>
 
 	<select id="login" resultMap="SysUser">
-		select user_no,user_name,org_no,pass_word,user_sts from sys_user where user_no=#{id}
+		select user_no,user_name,role_no,org_no,pass_word,user_sts from sys_user where user_no=#{user_no} and pass_word=#{pass_word}
 	</select>
 </mapper>

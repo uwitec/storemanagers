@@ -63,7 +63,7 @@ public class UsersAction {
 
 		JSONObject datas = new JSONObject();
 		datas.put("rows", json);
-		datas.put("total", 11);
+		datas.put("total", page.getTotalResult());
 		return JSONObject.fromObject(datas);
 	}
 

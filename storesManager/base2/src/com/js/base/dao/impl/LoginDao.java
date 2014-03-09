@@ -1,5 +1,7 @@
 package com.js.base.dao.impl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,14 @@ public class LoginDao implements ILoginDao{
 	private SqlSession sqlSession;
 	
 	@Override
-	public SysUserBean getUser(String userNo) {
-		SysUserBean bean = (SysUserBean)sqlSession.selectOne("login",userNo);
+	public SysUserBean getUser(SysUserBean user) {
+		List<SysUserBean> list=sqlSession.selectList("login", user);
+		SysUserBean userbean=null;
+		if(list!=null&&list.size()>0){
+			userbean=list.get(0);
+		}
 		logger.info("getUser......");
 		
-		return bean;
+		return userbean;
 	}
 }

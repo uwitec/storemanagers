@@ -6,6 +6,7 @@
  * 移除：icon-remove
  * 保存：icon-save
  * 取消：icon-cancel
+ * 关闭：icon-close
  * OK：icon-ok
  * NO：icon-no
  * 剪切：icon-cut
@@ -63,6 +64,9 @@
 }
 .icon-cancel{
 	background:url('icons/cancel.png') no-repeat;
+}
+.icon-close{
+	background:url('icons/close.png') no-repeat;
 }
 .icon-reload{
 	background:url('icons/reload.png') no-repeat;
